@@ -4,12 +4,13 @@ import './App.css';
 interface City {
   id: number;
   name: string;
+  isFavourite: boolean;
 }
 
 const CITIES: City[] = [
-  { id: 1, name: 'Trieste' },
-  { id: 2, name: 'Milano' },
-  { id: 3, name: 'Rome' },
+  { id: 1, name: 'Trieste', isFavourite: false},
+  { id: 2, name: 'Milano', isFavourite: true},
+  { id: 3, name: 'Rome', isFavourite: true},
 ];
 
 function App() {
@@ -25,13 +26,13 @@ function App() {
       {
         CITIES.map(city => {
           const activeStyle = { color: city.id === currentCity?.id ? 'red' : 'black' }
-          return <button key={city.id} style={activeStyle} onClick={() => viewMap(city)}>{city.name}</button>
+          return <button key={city.id} style={activeStyle} onClick={() => viewMap(city)}>{city.isFavourite ? "❤︎" : null}{city.name}</button>
         })
       }
         <hr/>
-        {currentCity?.name}
+        {currentCity?.isFavourite ? "❤︎" : null}{currentCity?.name}
         <div className='image-container'>
-          {currentCity && <img width={200} height={100} src={url} alt=""/>}
+        {currentCity && <img width={200} height={100} src={url} alt=""/>}
         </div>
     </div>
   );
